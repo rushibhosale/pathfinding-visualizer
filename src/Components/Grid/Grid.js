@@ -1,5 +1,8 @@
 import { Component } from "react";
 import "./Grid.css";
+import { Node } from "./Node/Node";
+
+
 export class Grid extends Component {
 
     constructor() {
@@ -7,6 +10,10 @@ export class Grid extends Component {
         this.state = {
             grid: []
         }
+
+        //set variable for  max rows and cols
+        this.maxWidth = 50;
+        this.maxHeight = 20;
     }
 
     componentDidMount() {
@@ -16,9 +23,9 @@ export class Grid extends Component {
 
     createInitialGrid() {
         const grid = [];
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < this.maxHeight; i++) {
             const row = [];
-            for (let j = 0; j < 40; j++) {
+            for (let j = 0; j < this.maxWidth; j++) {
                 row.push(createNewNode(i, j));
             }
             grid.push(row);
@@ -38,8 +45,16 @@ export class Grid extends Component {
                             <div key={rowIdx} className="row" >
                                 {
                                     row.map((node, nodeIdx) => {
-                                        return (<div key={nodeIdx} id={`node-${rowIdx}-${nodeIdx}`} className="node"></div>
+                                        const { row, col, isStartNode, isFinishNode } = node;
+                                        return (<Node
+                                            key={nodeIdx}
+                                            row={row}
+                                            col={col}
+                                            isStartNode={isStartNode}
+                                            isFinishNode={isFinishNode}
+                                        />
                                         );
+
                                     })
                                 }
                             </div>

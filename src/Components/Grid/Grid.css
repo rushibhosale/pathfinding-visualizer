@@ -1,8 +1,16 @@
 .row {
+  height: 30px;
+}
+.grid {
+  margin: 70px 0 0 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 .node {
-  width: 25px;
-  height: 25px;
-  border: 1px solid #111;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(175, 216, 248);
   display: inline-block;
 }
