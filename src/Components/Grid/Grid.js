@@ -54,13 +54,16 @@ export class Grid extends Component {
                             <div key={rowIdx} className="row" >
                                 {
                                     row.map((node, nodeIdx) => {
-                                        const { row, col, isStartNode, isFinishNode } = node;
+                                        const { row, col, isStartNode, isFinishNode, isWall } = node;
                                         return (<Node
                                             key={nodeIdx}
                                             row={row}
                                             col={col}
                                             isStartNode={isStartNode}
                                             isFinishNode={isFinishNode}
+                                            onMouseDown={(row, col) => this.handleMouseDownEvent(row, col)}
+                                            onMouseUp={(row, col) => this.handleMouseUpEvent(row, col)}
+                                            isWall={isWall}
                                         />
                                         );
 
@@ -75,6 +78,18 @@ export class Grid extends Component {
         );
     }
 
+    //mouse clicked
+    handleMouseDownEvent(row, col) {
+        console.log("mouse is clicked", row, col);
+        const { grid } = this.state;
+        grid[row][col].isWall = true;
+        this.setState({ grid })
+    }
+    //mouse realeased
+    handleMouseUpEvent(row, col) {
+        console.log("mouse is realease", row, col);
+    }
+
 }
 
 const createNewNode = (row, col) => {
@@ -84,6 +99,7 @@ const createNewNode = (row, col) => {
         col,
         isStartNode: row == START_NODE_ROW && col == START_NODE_COL,
         isFinishNode: row == FINISH_NODE_ROW && col == FINISH_NODE_COL,
+        isWall: false
     }
 
 }
