@@ -1,19 +1,19 @@
 .node {
   width: 30px;
   height: 30px;
-  border: 1px solid rgb(175, 216, 248);
+  border: 1px solid rgba(175, 216, 248, 0.9);
 }
 
 .start-node {
-  /* background-color: blue; */
   background: url("../../../assets/start.svg") no-repeat center center;
   background-size: cover;
 }
 .finish-node {
-  /* background-color: green; */
   background: url("../../../assets/finish.svg") no-repeat center center;
   background-size: cover;
 }
+
 .wall {
   background-color: #111;
+  border-color: #111;
 }

@@ -14,7 +14,8 @@ export class Grid extends Component {
     constructor() {
         super();
         this.state = {
-            grid: []
+            grid: [],
+            isMouseClicked: false
         }
 
         //set variable for  max rows and cols
@@ -63,6 +64,7 @@ export class Grid extends Component {
                                             isFinishNode={isFinishNode}
                                             onMouseDown={(row, col) => this.handleMouseDownEvent(row, col)}
                                             onMouseUp={(row, col) => this.handleMouseUpEvent(row, col)}
+                                            onMouseEnter={(row, col) => this.handleMouseEnterEvent(row, col)}
                                             isWall={isWall}
                                         />
                                         );
@@ -80,20 +82,28 @@ export class Grid extends Component {
 
     //mouse clicked
     handleMouseDownEvent(row, col) {
-        console.log("mouse is clicked", row, col);
-        const { grid } = this.state;
-        grid[row][col].isWall = true;
-        this.setState({ grid })
+        this.setState({ isMouseClicked: true });
+        if ((row == START_NODE_ROW && col == START_NODE_COL) || (row == FINISH_NODE_ROW && col == FINISH_NODE_COL)) return;
+        console.log("mouse is realease", row, col);
+        const grid = toggleWall(this.state.grid, row, col);
+        this.setState({ grid });
+    }
+    handleMouseEnterEvent(row, col) {
+        if (!this.state.isMouseClicked) return;
+        if ((row == START_NODE_ROW && col == START_NODE_COL) || (row == FINISH_NODE_ROW && col == FINISH_NODE_COL)) return;
+        console.log("mouse is realease", row, col);
+        const grid = toggleWall(this.state.grid, row, col);
+        this.setState({ grid });
     }
     //mouse realeased
     handleMouseUpEvent(row, col) {
-        console.log("mouse is realease", row, col);
+        this.setState({ isMouseClicked: false })
     }
 
+
 }
-
+//create Node
 const createNewNode = (row, col) => {
-
     return {
         row,
         col,
@@ -102,4 +112,15 @@ const createNewNode = (row, col) => {
         isWall: false
     }
 
+}
+//togglewall
+const toggleWall = (grid, row, col) => {
+    const tempGrid = grid.slice();
+    const node = tempGrid[row][col];
+    const newNode = {
+        ...node,
+        isWall: !node.isWall
+    }
+    tempGrid[row][col] = newNode;
+    return tempGrid;
 }

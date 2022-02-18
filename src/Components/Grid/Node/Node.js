@@ -5,7 +5,7 @@ export class Node extends Component {
         super();
     }
     render() {
-        const { row, col, isStartNode, isFinishNode, onMouseDown, onMouseUp, isWall } = this.props;
+        const { row, col, isStartNode, isFinishNode, onMouseDown, onMouseUp, onMouseEnter, isWall } = this.props;
         const class_name = isStartNode ? "start-node"
             : isFinishNode ? "finish-node"
                 : isWall ? "wall" : "";
@@ -14,6 +14,7 @@ export class Node extends Component {
             <div id={`node-${row}-${col}`}
                 className={`node ${class_name}`}
                 onMouseDown={(e) => onMouseDown(row, col)}
+                onMouseEnter={(e) => onMouseEnter(row, col)}
                 onMouseUp={(e) => onMouseUp(row, col)}
             ></div>
         );
