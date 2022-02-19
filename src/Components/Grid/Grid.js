@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Dijstras } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import "./Grid.css";
 import { Node } from "./Node/Node";
 
@@ -46,13 +47,15 @@ export class Grid extends Component {
         const { grid } = this.state;
 
         return (
-            <div className="grid">
-                {
-                    grid.map((row, rowIdx) => {
-                        return (
-                            <div key={rowIdx} className="row" >
-                                {
-                                    row.map((node, nodeIdx) => {
+            <><button onClick={this.visualize.bind(this)}>
+                Visualize!!
+            </button>
+                <div className="grid">
+                    {
+                        grid.map((row, rowIdx) => {
+                            return (
+                                <div key={rowIdx} className="row">
+                                    {row.map((node, nodeIdx) => {
                                         const { row, col, isStartNode, isFinishNode, isWall } = node;
                                         return (<Node
                                             key={nodeIdx}
@@ -63,73 +66,78 @@ export class Grid extends Component {
                                             onMouseDown={(row, col) => this.handleMouseDownEvent(row, col)}
                                             onMouseUp={(row, col) => this.handleMouseUpEvent(row, col)}
                                             onMouseEnter={(row, col) => this.handleMouseEnterEvent(row, col)}
-                                            isWall={isWall}
-                                        />
+                                            isWall={isWall} />
                                         );
 
-                                    })
-                                }
-                            </div>
-                        );
-                    })
-                }
-            </div >
+                                    })}
+                                </div>
+                            );
+                        })}
+                </div></>
 
         );
     }
 
     //mouse clicked
     handleMouseDownEvent(row, col) {
-        this.setState({ isMouseClicked: true });
-        if (row == START_NODE_ROW && col == START_NODE_COL) {
-            const grid = toggleStart(this.state.grid, row, col);
-            this.setState({ grid, isDraggingStart: true });
+
+        let grid;
+        if (row === START_NODE_ROW && col === START_NODE_COL) {
+            grid = toggleStart(this.state.grid, row, col);
+            this.setState({ isDraggingStart: true });
         }
         else if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
-            const grid = toggleFinsih(this.state.grid, row, col);
-            this.setState({ grid, isDraggingFinsh: true });
+            grid = toggleFinsih(this.state.grid, row, col);
+            this.setState({ isDraggingFinsh: true });
         }
         else {
-            console.log("mouse is realease", row, col);
-            const grid = toggleWall(this.state.grid, row, col);
-            this.setState({ grid });
-
+            grid = toggleWall(this.state.grid, row, col);
         }
-        // || (row == FINISH_NODE_ROW && col == FINISH_NODE_COL)) return;
+        this.setState({ grid, isMouseClicked: true });
+
     }
     handleMouseEnterEvent(row, col) {
         if (!this.state.isMouseClicked) return;
+        let grid;
         if (this.state.isDraggingStart) {
-            const grid = toggleStart(this.state.grid, row, col);
-            this.setState({ grid });
-            console.log("start nide");
+            if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) return;
+            grid = toggleStart(this.state.grid, row, col);
         }
         else if (this.state.isDraggingFinsh) {
-            const grid = toggleFinsih(this.state.grid, row, col);
-            this.setState({ grid });
+            if (row === START_NODE_ROW && col === START_NODE_COL) return;
+            grid = toggleFinsih(this.state.grid, row, col);
         }
-        else {
-            console.log("mouse is realease", row, col);
-            const grid = toggleWall(this.state.grid, row, col);
-            this.setState({ grid });
+        else
+            grid = toggleWall(this.state.grid, row, col);
 
-        }
+        this.setState({ grid });
     }
     //mouse realeased
     handleMouseUpEvent(row, col) {
-        this.setState({ isMouseClicked: false, isDraggingStart: false })
+        this.setState({ isMouseClicked: false, isDraggingStart: false, isDraggingFinsh: false })
     }
 
 
+    //
+    visualize() {
+        // console.log("visulizing", this.state);
+        const { grid } = this.state;
+        const startNode = grid[START_NODE_ROW][START_NODE_COL];
+        const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        const visitedArray = Dijstras(grid, startNode, endNode);
+        animateDijstra(visitedArray);
+    }
 }
 //create Node
 const createNewNode = (row, col) => {
     return {
         row,
         col,
-        isStartNode: row == START_NODE_ROW && col == START_NODE_COL,
-        isFinishNode: row == FINISH_NODE_ROW && col == FINISH_NODE_COL,
-        isWall: false
+        isStartNode: row === START_NODE_ROW && col === START_NODE_COL,
+        isFinishNode: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+        isWall: false,
+        distance: Infinity,
+        isVisited: false
     }
 
 }
@@ -174,3 +182,16 @@ const toggleFinsih = (grid, row, col) => {
     return tempGrid;
 }
 
+
+const animateDijstra = (visitedArray) => {
+    for (let i = 0; i < visitedArray.length; i++) {
+        const node = visitedArray[i];
+        setTimeout(
+            () => {
+                document.getElementById(`node-${node.row}-${node.col}`).className = "node  node-visited";
+            },
+            50 * i
+        );
+    }
+
+}

@@ -6,14 +6,41 @@
 
 .start-node {
   background: url("../../../assets/start.svg") no-repeat center center;
-  background-size: cover;
 }
 .finish-node {
   background: url("../../../assets/finish.svg") no-repeat center center;
+}
+.start-node,
+.finish-node {
+  cursor: pointer;
   background-size: cover;
 }
-
 .wall {
   background-color: #111;
   border-color: #111;
+}
+
+.node-visited {
+  animation: visitedNodeAnimation 1.2s 1 ease-out forwards alternate;
+}
+@keyframes visitedNodeAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(0, 0, 66, 0.75);
+    border-radius: 100%;
+  }
+
+  50% {
+    background-color: rgba(17, 104, 217, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(0, 217, 159, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
 }
