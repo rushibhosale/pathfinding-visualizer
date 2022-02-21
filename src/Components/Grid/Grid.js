@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Dijstras } from "../../Algorithms/GraphAlgorithms/Dijstras";
+import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import "./Grid.css";
 import { Node } from "./Node/Node";
 
@@ -125,7 +125,8 @@ export class Grid extends Component {
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         const visitedArray = Dijstras(grid, startNode, endNode);
-        animateDijstra(visitedArray);
+        const shortestPath = getShortesPath(endNode);
+        animateDijstra(visitedArray, shortestPath);
     }
 }
 //create Node
@@ -137,7 +138,8 @@ const createNewNode = (row, col) => {
         isFinishNode: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
         isWall: false,
         distance: Infinity,
-        isVisited: false
+        isVisited: false,
+        previousNode: null
     }
 
 }
@@ -183,15 +185,36 @@ const toggleFinsih = (grid, row, col) => {
 }
 
 
-const animateDijstra = (visitedArray) => {
-    for (let i = 0; i < visitedArray.length; i++) {
+const animateDijstra = (visitedArray, shortesPath) => {
+    for (let i = 0; i <= visitedArray.length; i++) {
+        if (i == visitedArray.length) {
+            setTimeout(
+                () => {
+                    animateShortestPath(shortesPath);
+                },
+                10 * i
+            );
+            return;
+
+        }
         const node = visitedArray[i];
         setTimeout(
             () => {
                 document.getElementById(`node-${node.row}-${node.col}`).className = "node  node-visited";
             },
-            50 * i
+            10 * i
         );
     }
 
+}
+const animateShortestPath = (shortesPath) => {
+    for (let i = 0; i <= shortesPath.length; i++) {
+        const node = shortesPath[i];
+        setTimeout(
+            () => {
+                document.getElementById(`node-${node.row}-${node.col}`).className = "node  node-shortest-path";
+            },
+            50 * i
+        );
+    }
 }

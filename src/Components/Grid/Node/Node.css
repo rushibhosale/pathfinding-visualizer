@@ -44,3 +44,22 @@
     background-color: rgba(0, 190, 218, 0.75);
   }
 }
+.node-shortest-path {
+  animation: shortestPath 1.5s ease-out alternate 1 forwards;
+}
+@keyframes shortestPath {
+  0% {
+    transform: scale(0.6);
+    background-color: rgb(255, 254, 106);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(255, 254, 106);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(255, 254, 106);
+  }
+}

@@ -23,6 +23,7 @@ const updateUnvisitedNeighbors = (node, grid) => {
     const neighbors = getAllNeigbours(node, grid);
     for (let neighbor of neighbors) {
         neighbor.distance = node.distance + 1;
+        neighbor.previousNode = node;
     }
 
 }
@@ -55,4 +56,13 @@ const getClosetNode = (unvisitedNodes) => {
     const closetNode = unvisitedNodes[winner];
     unvisitedNodes.splice(winner, 1);
     return closetNode;
+}
+export const getShortesPath = (node) => {
+    const shortesPath = [];
+    while (node.previousNode) {
+        shortesPath.unshift(node);
+        node = node.previousNode;
+    }
+    shortesPath.unshift(node);
+    return shortesPath;
 }
