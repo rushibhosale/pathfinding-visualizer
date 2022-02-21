@@ -22,6 +22,7 @@
 
 .node-visited {
   animation: visitedNodeAnimation 1.2s 1 ease-out forwards alternate;
+  /* animation-delay: -1.5s; */
 }
 @keyframes visitedNodeAnimation {
   0% {

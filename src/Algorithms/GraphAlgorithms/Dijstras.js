@@ -1,7 +1,6 @@
 export function Dijstras(grid, startNode, endNode) {
     const unvisitedNodes = getAllNodes(grid);
     const visitedNodes = [];
-    console.log(startNode)
     startNode.isWall = endNode.isWall = false;
     startNode.distance = 0;
     while (!!unvisitedNodes.length) {
@@ -11,7 +10,6 @@ export function Dijstras(grid, startNode, endNode) {
         if (closetNode.distance === Infinity) return visitedNodes;
         visitedNodes.push(closetNode);
         if (closetNode === endNode) {
-            console.log("finsi")
             return visitedNodes;
         }
         updateUnvisitedNeighbors(closetNode, grid);

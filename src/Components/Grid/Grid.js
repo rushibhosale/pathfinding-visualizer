@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { PathAnimation } from "../../Algorithms/Animation/PathAnimation";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import "./Grid.css";
 import { Node } from "./Node/Node";
@@ -126,7 +127,7 @@ export class Grid extends Component {
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         const visitedArray = Dijstras(grid, startNode, endNode);
         const shortestPath = getShortesPath(endNode);
-        animateDijstra(visitedArray, shortestPath);
+        PathAnimation(visitedArray, shortestPath);
     }
 }
 //create Node
@@ -182,39 +183,4 @@ const toggleFinsih = (grid, row, col) => {
     FINISH_NODE_ROW = row;
     FINISH_NODE_COL = col;
     return tempGrid;
-}
-
-
-const animateDijstra = (visitedArray, shortesPath) => {
-    for (let i = 0; i <= visitedArray.length; i++) {
-        if (i == visitedArray.length) {
-            setTimeout(
-                () => {
-                    animateShortestPath(shortesPath);
-                },
-                10 * i
-            );
-            return;
-
-        }
-        const node = visitedArray[i];
-        setTimeout(
-            () => {
-                document.getElementById(`node-${node.row}-${node.col}`).className = "node  node-visited";
-            },
-            10 * i
-        );
-    }
-
-}
-const animateShortestPath = (shortesPath) => {
-    for (let i = 0; i <= shortesPath.length; i++) {
-        const node = shortesPath[i];
-        setTimeout(
-            () => {
-                document.getElementById(`node-${node.row}-${node.col}`).className = "node  node-shortest-path";
-            },
-            50 * i
-        );
-    }
 }
