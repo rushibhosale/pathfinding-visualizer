@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { PathAnimation } from "../../Algorithms/Animation/PathAnimation";
+import { Astar } from "../../Algorithms/GraphAlgorithms/Astar";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import "./Grid.css";
 import { Node } from "./Node/Node";
@@ -23,7 +24,7 @@ export class Grid extends Component {
         }
         //set variable for  max rows and cols
         this.maxWidth = 50;
-        this.maxHeight = 20;
+        this.maxHeight = 21;
     }
 
     componentDidMount() {
@@ -125,7 +126,7 @@ export class Grid extends Component {
         const { grid } = this.state;
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        const visitedArray = Dijstras(grid, startNode, endNode);
+        const visitedArray = Astar(grid, startNode, endNode);
         const shortestPath = getShortesPath(endNode);
         PathAnimation(visitedArray, shortestPath);
     }
@@ -140,6 +141,9 @@ const createNewNode = (row, col) => {
         isWall: false,
         distance: Infinity,
         isVisited: false,
+        //for a* 
+        heurastic: Infinity,
+        fscore: Infinity,
         previousNode: null
     }
 

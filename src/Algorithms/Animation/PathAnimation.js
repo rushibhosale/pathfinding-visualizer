@@ -1,7 +1,7 @@
 import { sleep } from "../UtilityFunctions";
 
 export async function PathAnimation(visitedNodes, minimumPath) {
-    let speed = 30;
+    let speed = 3;
     for (let i = 0; visitedNodes && i <= visitedNodes.length; i++) {
         const node = visitedNodes[i];
         if (i === visitedNodes.length) {
@@ -21,7 +21,7 @@ export async function PathAnimation(visitedNodes, minimumPath) {
             document.getElementById(`node-${node.row}-${node.col}`).className =
                 `node node-visited`;
 
-        await sleep(speed);
+        await sleep(speed * 3);
     }
 
     // await animateShortestPath(minimumPath, speed);

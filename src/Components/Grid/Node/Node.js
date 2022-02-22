@@ -1,9 +1,7 @@
 import { Component } from "react";
 import "./Node.css";
 export class Node extends Component {
-    constructor() {
-        super();
-    }
+
     render() {
         const { row, col, isStartNode, isFinishNode, onMouseDown, onMouseUp, onMouseEnter, isWall } = this.props;
         const class_name = isStartNode ? "start-node"

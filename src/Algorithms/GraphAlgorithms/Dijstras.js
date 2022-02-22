@@ -1,3 +1,5 @@
+import { getAllNeigbours } from "../UtilityFunctions";
+
 export function Dijstras(grid, startNode, endNode) {
     const unvisitedNodes = getAllNodes(grid);
     const visitedNodes = [];
@@ -23,18 +25,9 @@ const updateUnvisitedNeighbors = (node, grid) => {
         neighbor.distance = node.distance + 1;
         neighbor.previousNode = node;
     }
-
 }
 
-const getAllNeigbours = (node, grid) => {
-    const neighbors = [];
-    const { col, row } = node;
-    if (row > 0) neighbors.push(grid[row - 1][col]);
-    if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
-    if (col > 0) neighbors.push(grid[row][col - 1]);
-    if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
-    return neighbors.filter(neighbor => !neighbor.isVisited);
-}
+
 const getAllNodes = (grid) => {
     const unvisitedNodes = [];
     grid.forEach(row => {
@@ -42,9 +35,9 @@ const getAllNodes = (grid) => {
             unvisitedNodes.push(node);
         })
     });
-
     return unvisitedNodes;
 }
+
 const getClosetNode = (unvisitedNodes) => {
     let winner = 0;
     for (let i = 0; i < unvisitedNodes.length; i++) {
