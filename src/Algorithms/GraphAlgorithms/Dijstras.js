@@ -1,4 +1,4 @@
-import { getAllNeigbours } from "../UtilityFunctions";
+import { getAllNeighbours } from "../UtilityFunctions";
 
 export function Dijstras(grid, startNode, endNode) {
     const unvisitedNodes = getAllNodes(grid);
@@ -16,11 +16,11 @@ export function Dijstras(grid, startNode, endNode) {
         }
         updateUnvisitedNeighbors(closetNode, grid);
     }
-
+    return visitedNodes;
 }
 
 const updateUnvisitedNeighbors = (node, grid) => {
-    const neighbors = getAllNeigbours(node, grid);
+    const neighbors = getAllNeighbours(node, grid);
     for (let neighbor of neighbors) {
         neighbor.distance = node.distance + 1;
         neighbor.previousNode = node;

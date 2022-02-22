@@ -1,7 +1,7 @@
 import { sleep } from "../UtilityFunctions";
 
 export async function PathAnimation(visitedNodes, minimumPath) {
-    let speed = 3;
+    let speed = 20;
     for (let i = 0; visitedNodes && i <= visitedNodes.length; i++) {
         const node = visitedNodes[i];
         if (i === visitedNodes.length) {
