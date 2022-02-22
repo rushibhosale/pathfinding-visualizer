@@ -2,7 +2,27 @@ import { getAllNeighbours } from "../UtilityFunctions";
 
 const visitedNodes = [];
 export function DefthFirstSearch(grid, startNode, endNode) {
-    dfs(grid, startNode, endNode, visitedNodes);
+    // dfs(grid, startNode, endNode, visitedNodes);
+    //iterative dfs
+    const stack = []; //stack
+    stack.push(startNode);
+    while (!!stack.length) {
+
+        const top = stack.pop();
+
+        top.isVisited = true;
+
+        visitedNodes.push(top);
+        if (top === endNode)
+            return visitedNodes;
+
+        const neighbours = getAllNeighbours(top, grid);
+        for (let i = 0; i < neighbours.length; i++) {
+            const neighbour = neighbours[i];
+            neighbour.previousNode = top;
+            stack.push(neighbour);
+        }
+    }
     return visitedNodes;
 }
 //recursive dfs 
