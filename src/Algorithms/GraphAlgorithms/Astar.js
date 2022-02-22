@@ -31,7 +31,7 @@ export function Astar(grid, startNode, endNode) {
             else {
                 neighbor.distance = distance;
                 newPath = true;
-                openset.push(neighbor);
+                openset.unshift(neighbor);
 
             }
             if (newPath) {
@@ -56,7 +56,12 @@ const getClosetNode = (openset) => {
 }
 
 // //heurasticDistance
+// const heurasticDistance = (start, goal) => {
+//     return Math.abs(start.row - goal.row) + Math.abs(start.col - goal.col);
+// }
+//Euclidean Distance
 const heurasticDistance = (start, goal) => {
-    return Math.abs(start.row - goal.row) + Math.abs(start.col - goal.col);
+    const x = Math.abs(start.row - goal.row);
+    const y = Math.abs(start.col - goal.col);
+    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 }
-
