@@ -5,7 +5,8 @@ import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirs
 import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import { GreedyBFS } from "../../Algorithms/GraphAlgorithms/GreedyBFS";
-import { RecursiveDivision } from "../../Algorithms/MazeAlgorithms/RecursiveDivision";
+import { RecursiveDivisionHorizontal } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionHorizontal";
+import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionVertical";
 import { clearPaths } from "../../Algorithms/UtilityFunctions";
 import "./Grid.css";
 import { Node } from "./Node/Node";
@@ -135,22 +136,21 @@ export class Grid extends Component {
         clearPaths(grid, false);
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        const visitedArray = GreedyBFS(grid, startNode, endNode);
+        const visitedArray = Astar(grid, startNode, endNode);
         const shortestPath = getShortesPath(endNode);
         PathAnimation(visitedArray, shortestPath);
     }
     visualizeMaze() {
         const { grid } = this.state;
         clearPaths(grid, true);
-        const visitedArray = RecursiveDivision(
+        const visitedArray = RecursiveDivisionHorizontal(
             grid,
             1,
             grid.length - 2,
             1,
             grid[0].length - 2,
-            "horizontal",
+            "vertical",
         );
-
         this.setState({ grid });
     }
 }
