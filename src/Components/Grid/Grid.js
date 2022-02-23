@@ -4,6 +4,9 @@ import { Astar } from "../../Algorithms/GraphAlgorithms/Astar";
 import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirstSearch";
 import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
+import { GreedyBFS } from "../../Algorithms/GraphAlgorithms/GreedyBFS";
+import { RecursiveDivision } from "../../Algorithms/MazeAlgorithms/RecursiveDivision";
+import { clearPaths } from "../../Algorithms/UtilityFunctions";
 import "./Grid.css";
 import { Node } from "./Node/Node";
 
@@ -53,7 +56,10 @@ export class Grid extends Component {
         return (
             <><button onClick={this.visualize.bind(this)}>
                 Visualize!!
-            </button>
+            </button> | <button onClick={this.visualizeMaze.bind(this)}>
+                    generateMaze!!
+                </button>
+
                 <div className="grid">
                     {
                         grid.map((row, rowIdx) => {
@@ -126,11 +132,26 @@ export class Grid extends Component {
     visualize() {
         // console.log("visulizing", this.state);
         const { grid } = this.state;
+        clearPaths(grid, false);
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        const visitedArray = BreadthFirstSearch(grid, startNode, endNode);
+        const visitedArray = GreedyBFS(grid, startNode, endNode);
         const shortestPath = getShortesPath(endNode);
         PathAnimation(visitedArray, shortestPath);
+    }
+    visualizeMaze() {
+        const { grid } = this.state;
+        clearPaths(grid, true);
+        const visitedArray = RecursiveDivision(
+            grid,
+            1,
+            grid.length - 2,
+            1,
+            grid[0].length - 2,
+            "horizontal",
+        );
+
+        this.setState({ grid });
     }
 }
 //create Node

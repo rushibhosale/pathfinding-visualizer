@@ -1,4 +1,5 @@
-import { getAllNeighbours } from "../UtilityFunctions";
+import { getAllNeighbours, heurasticDistance } from "../UtilityFunctions";
+// f(n)=g(n)+h(n)
 export function Astar(grid, startNode, endNode) {
     console.log("Astart")
     const openset = [];
@@ -55,13 +56,3 @@ const getClosetNode = (openset) => {
     return closetNode;
 }
 
-// //heurasticDistance
-const heurasticDistance = (start, goal) => {
-    return Math.abs(start.row - goal.row) + Math.abs(start.col - goal.col);
-}
-//Euclidean Distance
-// const heurasticDistance = (start, goal) => {
-//     const x = Math.abs(start.row - goal.row);
-//     const y = Math.abs(start.col - goal.col);
-//     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-// }

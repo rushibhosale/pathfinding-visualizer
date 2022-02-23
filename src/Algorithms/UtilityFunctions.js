@@ -1,3 +1,28 @@
+
+
+const clearPaths = (grid, clearWalls, clearPath = true) => {
+    grid.forEach(row => {
+        row.forEach(node => {
+            node.distance = Infinity;
+            node.isVisited = false;
+            node.previousNode = null;
+            if (clearWalls) node.isWall = false;
+            else if (clearPath) {
+                if (!node.isWall && !node.isStartNode && !node.isFinishNode)
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        "node";
+                else if (node.isStartNode)
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        "node start-node";
+                else if (node.isFinishNode)
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        "node finish-node";
+            }
+
+        });
+    });
+}
+
 const getAllNeighbours = (node, grid) => {
     const neighbours = [];
     let { row, col } = node;
@@ -20,4 +45,16 @@ const getAllNeighbours = (node, grid) => {
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-export { getAllNeighbours, sleep };
+// //heurasticDistance
+const heurasticDistance = (start, goal) => {
+    return Math.abs(start.row - goal.row) + Math.abs(start.col - goal.col);
+}
+
+//Euclidean Distance
+// const heurasticDistance = (start, goal) => {
+//     const x = Math.abs(start.row - goal.row);
+//     const y = Math.abs(start.col - goal.col);
+//     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+// }
+
+export { getAllNeighbours, sleep, heurasticDistance, clearPaths };
