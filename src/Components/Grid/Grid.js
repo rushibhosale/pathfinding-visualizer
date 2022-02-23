@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { PathAnimation } from "../../Algorithms/Animation/PathAnimation";
 import { Astar } from "../../Algorithms/GraphAlgorithms/Astar";
+import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirstSearch";
 import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import "./Grid.css";
@@ -127,7 +128,7 @@ export class Grid extends Component {
         const { grid } = this.state;
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        const visitedArray = DefthFirstSearch(grid, startNode, endNode);
+        const visitedArray = BreadthFirstSearch(grid, startNode, endNode);
         const shortestPath = getShortesPath(endNode);
         PathAnimation(visitedArray, shortestPath);
     }

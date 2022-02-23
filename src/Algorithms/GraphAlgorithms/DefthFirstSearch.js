@@ -7,12 +7,10 @@ export function DefthFirstSearch(grid, startNode, endNode) {
     const stack = []; //stack
     stack.push(startNode);
     while (!!stack.length) {
-
         const top = stack.pop();
-
         top.isVisited = true;
-
         visitedNodes.push(top);
+
         if (top === endNode)
             return visitedNodes;
 
