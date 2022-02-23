@@ -1,13 +1,16 @@
 import { Component } from "react";
+import { MazeAnimation } from "../../Algorithms/Animation/MazeAnimation";
 import { PathAnimation } from "../../Algorithms/Animation/PathAnimation";
 import { Astar } from "../../Algorithms/GraphAlgorithms/Astar";
 import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirstSearch";
 import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import { GreedyBFS } from "../../Algorithms/GraphAlgorithms/GreedyBFS";
+import { RecursiveDivision } from "../../Algorithms/MazeAlgorithms/RecursiveDivision";
 import { RecursiveDivisionHorizontal } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionHorizontal";
 import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionVertical";
 import { clearPaths } from "../../Algorithms/UtilityFunctions";
+import { Navbar } from "../Navbar/Navbar";
 import "./Grid.css";
 import { Node } from "./Node/Node";
 
@@ -55,12 +58,13 @@ export class Grid extends Component {
         const { grid } = this.state;
 
         return (
-            <><button onClick={this.visualize.bind(this)}>
-                Visualize!!
-            </button> | <button onClick={this.visualizeMaze.bind(this)}>
-                    generateMaze!!
-                </button>
-
+            <>
+                <Navbar></Navbar>
+                {/* //<button onClick={this.visualize.bind(this)}>
+            //     Visualize!!
+            // </button> | <button onClick={this.visualizeMaze.bind(this)}>
+            //         generateMaze!!
+            //     </button> */}
                 <div className="grid">
                     {
                         grid.map((row, rowIdx) => {
@@ -149,9 +153,10 @@ export class Grid extends Component {
             grid.length - 2,
             1,
             grid[0].length - 2,
-            "vertical",
+            "horizontal",
         );
-        this.setState({ grid });
+        MazeAnimation(visitedArray);
+        // this.setState({ grid });
     }
 }
 //create Node

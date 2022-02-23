@@ -9,7 +9,7 @@ export function RecursiveDivision(board, rowStart, rowEnd, colStart, colEnd, ori
             board[i][0].isWall = true;
             board[i][board[0].length - 1].isWall = true;
             walls.push(board[i][0]);
-            walls.push(board[i][board.length - 1]);
+            walls.push(board[i][board[0].length - 1]);
         }
         for (let i = 0; i < board[0].length; i++) {
             board[0][i].isWall = true;
@@ -30,9 +30,8 @@ export function RecursiveDivision(board, rowStart, rowEnd, colStart, colEnd, ori
             const node = board[y][i];
             if (i === hole) node.isWall = false;
             else if (!node.isVisited && !(node.isStartNode || node.isFinishNode)) {
-                walls.push(node);
                 node.isWall = true;
-
+                walls.push(node);
             }
         }
         if (y - 1 - rowStart > colEnd - colStart) {

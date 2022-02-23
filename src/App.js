@@ -2,10 +2,8 @@ import { Grid } from "./Components/Grid/Grid";
 
 function App() {
   return (
-    //Grid component
-
     <div className="App">
-      <Grid />
+      <Grid></Grid>
     </div>
   );
 

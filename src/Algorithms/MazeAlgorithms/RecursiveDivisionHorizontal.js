@@ -9,7 +9,7 @@ export function RecursiveDivisionHorizontal(board, rowStart, rowEnd, colStart, c
             board[i][0].isWall = true;
             board[i][board[0].length - 1].isWall = true;
             walls.push(board[i][0]);
-            walls.push(board[i][board.length - 1]);
+            walls.push(board[i][board[0].length - 1]);
         }
         for (let i = 0; i < board[0].length; i++) {
             board[0][i].isWall = true;
