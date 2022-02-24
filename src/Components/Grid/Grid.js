@@ -59,7 +59,11 @@ export class Grid extends Component {
 
         return (
             <>
-                <Navbar></Navbar>
+                <Navbar
+                    data={{
+                        handler: this.algorithmHandler.bind(this)
+                    }}
+                ></Navbar>
                 {/* //<button onClick={this.visualize.bind(this)}>
             //     Visualize!!
             // </button> | <button onClick={this.visualizeMaze.bind(this)}>
@@ -157,6 +161,9 @@ export class Grid extends Component {
         );
         MazeAnimation(visitedArray);
         // this.setState({ grid });
+    }
+    algorithmHandler() {
+        console.log("hello from handler");
     }
 }
 //create Node

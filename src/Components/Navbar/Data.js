@@ -38,5 +38,19 @@ const MazeAlgorithms = [
     },
 
 ]
+const speed = [
+    {
+        title: "Slow",
+        value: "slow"
+    },
+    {
+        title: "Normal",
+        value: "Normal"
+    },
+    {
+        title: "Fast",
+        value: "Fast"
+    }
+]
 
-export { GraphAlgorithms, MazeAlgorithms };
+export { GraphAlgorithms, MazeAlgorithms, speed };
