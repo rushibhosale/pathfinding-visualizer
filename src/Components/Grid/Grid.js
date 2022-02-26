@@ -13,6 +13,7 @@ import { clearPaths } from "../../Algorithms/UtilityFunctions";
 import { Navbar } from "../Navbar/Navbar";
 import "./Grid.css";
 import { Node } from "./Node/Node";
+import { RunAlgorithms } from "./RunAlgorithm";
 
 //startNode row,col
 let START_NODE_ROW = 10;
@@ -64,11 +65,11 @@ export class Grid extends Component {
                         handler: this.algorithmHandler.bind(this)
                     }}
                 ></Navbar>
-                {/* //<button onClick={this.visualize.bind(this)}>
-            //     Visualize!!
-            // </button> | <button onClick={this.visualizeMaze.bind(this)}>
-            //         generateMaze!!
-            //     </button> */}
+                {/* <button onClick={this.visualize.bind(this)}>
+                    Visualize!!
+                </button> | <button onClick={this.visualizeMaze.bind(this)}>
+                    generateMaze!!
+                </button> */}
                 <div className="grid">
                     {
                         grid.map((row, rowIdx) => {
@@ -99,7 +100,6 @@ export class Grid extends Component {
 
     //mouse clicked
     handleMouseDownEvent(row, col) {
-
         let grid;
         if (row === START_NODE_ROW && col === START_NODE_COL) {
             grid = toggleStart(this.state.grid, row, col);
@@ -135,35 +135,37 @@ export class Grid extends Component {
     handleMouseUpEvent(row, col) {
         this.setState({ isMouseClicked: false, isDraggingStart: false, isDraggingFinsh: false })
     }
-
-
-    //
-    visualize() {
-        // console.log("visulizing", this.state);
+    // visualize() {
+    //     // console.log("visulizing", this.state);
+    //     const { grid } = this.state;
+    //     clearPaths(grid, false);
+    //     const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    //     const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    //     const visitedArray = Astar(grid, startNode, endNode);
+    //     const shortestPath = getShortesPath(endNode);
+    //     PathAnimation(visitedArray, shortestPath);
+    // }
+    // visualizeMaze() {
+    //     const { grid } = this.state;
+    //     clearPaths(grid, true);
+    //     const visitedArray = RecursiveDivisionHorizontal(
+    //         grid,
+    //         1,
+    //         grid.length - 2,
+    //         1,
+    //         grid[0].length - 2,
+    //         "horizontal",
+    //     );
+    //     MazeAnimation(visitedArray);
+    // }
+    algorithmHandler(value, type, speed) {
         const { grid } = this.state;
-        clearPaths(grid, false);
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        const visitedArray = Astar(grid, startNode, endNode);
-        const shortestPath = getShortesPath(endNode);
-        PathAnimation(visitedArray, shortestPath);
-    }
-    visualizeMaze() {
-        const { grid } = this.state;
-        clearPaths(grid, true);
-        const visitedArray = RecursiveDivisionHorizontal(
-            grid,
-            1,
-            grid.length - 2,
-            1,
-            grid[0].length - 2,
-            "horizontal",
-        );
-        MazeAnimation(visitedArray);
-        // this.setState({ grid });
-    }
-    algorithmHandler() {
-        console.log("hello from handler");
+        if (value === "clearPaths") {
+
+        }
+        RunAlgorithms(grid, startNode, endNode, value, type, speed)
     }
 }
 //create Node

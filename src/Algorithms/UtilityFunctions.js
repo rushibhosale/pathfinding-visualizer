@@ -6,6 +6,7 @@ const clearPaths = (grid, clearWalls, clearPath = true) => {
             node.distance = Infinity;
             node.isVisited = false;
             node.previousNode = null;
+            if (clearWalls) node.isWall = false;
             if (clearPath) {
                 if (!node.isWall && !node.isStartNode && !node.isFinishNode)
                     document.getElementById(`node-${node.row}-${node.col}`).className =
@@ -18,7 +19,6 @@ const clearPaths = (grid, clearWalls, clearPath = true) => {
                         "node finish-node";
             }
 
-            if (clearWalls) node.isWall = false;
         });
     });
 }

@@ -4,7 +4,7 @@ export function RecursiveDivisionHorizontal(board, rowStart, rowEnd, colStart, c
         return walls;
 
     if (surroundingWalls) {
-
+        walls = [];
         for (let i = 0; i < board.length; i++) {
             board[i][0].isWall = true;
             board[i][board[0].length - 1].isWall = true;

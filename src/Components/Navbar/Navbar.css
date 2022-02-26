@@ -76,15 +76,18 @@
   display: block;
 }
 #visualizebtn a {
-  border: 1px solid rgba(220, 20, 60, 0.7);
+  background-color: rgba(220, 20, 60, 0.7);
   padding: 15px 50px;
   line-height: 0.2em;
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(220, 20, 60, 0.7);
   transition: all 0.4s ease-in-out;
 }
 #visualizebtn a:hover {
-  background-color: rgba(220, 20, 60, 0.7);
   color: #ffffff;
-  border-color: #ffffff;
+  border: 1px solid #ffffff;
+  /* background-color: #333; */
 }
 .horizontal {
   display: inline-block !important;

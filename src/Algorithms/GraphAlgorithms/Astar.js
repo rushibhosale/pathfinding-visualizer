@@ -13,7 +13,6 @@ export function Astar(grid, startNode, endNode) {
         closetNode.isVisited = true;
         closeset.push(closetNode);
         if (closetNode === endNode) {
-            console.log(closeset)
             return closeset;
         }
         const neighbors = getAllNeighbours(closetNode, grid);
@@ -50,6 +49,10 @@ const getClosetNode = (openset) => {
     for (let i = 0; i < openset.length; i++) {
         if (openset[i].fscore < openset[winner].fscore)
             winner = i;
+        else if (openset[i].fscore === openset[winner].fscore) {
+            if (openset[i].heurastic < openset[winner].heurastic)
+                winner = i;
+        }
     }
     const closetNode = openset[winner];
     openset.splice(winner, 1);
