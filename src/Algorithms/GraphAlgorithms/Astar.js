@@ -1,7 +1,7 @@
 import { getAllNeighbours, heurasticDistance } from "../UtilityFunctions";
 // f(n)=g(n)+h(n)
 export function Astar(grid, startNode, endNode) {
-    console.log("Astart")
+
     const openset = [];
     const closeset = [];
     startNode.distance = startNode.fscore = 0;

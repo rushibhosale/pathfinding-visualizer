@@ -10,25 +10,26 @@ import { RecursiveDivisionHorizontal } from "../../Algorithms/MazeAlgorithms/Rec
 import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionVertical";
 import { clearPaths } from "../../Algorithms/UtilityFunctions";
 
-export function RunAlgorithms(grid, startNode, endNode, value, type, speed) {
-    speed = speed === "normal" ? 30 : speed === "slow" ? 40 : 20;
+export function RunAlgorithms(grid, startNode, endNode, value, type, speed, setVisualizingState) {
+    speed = speed === "normal" ? 100 : speed === "slow" ? 500 : 10;
+
     if (type === "graph") {
         clearPaths(grid, false);
         const visitedArray = visualizeGraphAlgorithm(grid, startNode, endNode, value);
         const minPathArray = getShortesPath(endNode);
-        PathAnimation(visitedArray, minPathArray, speed);
+        PathAnimation(visitedArray, minPathArray, speed, setVisualizingState);
     }
     else if (type === "maze") {
         clearPaths(grid, true);
         const walls = visualizeMazeAlgorithm(grid, value);
-        MazeAnimation(walls, speed);
+        MazeAnimation(walls, speed, setVisualizingState);
     }
     else if (type === "clearPaths") {
         clearPaths(grid, true);
-        console.log("sd")
     }
-
+    return true;
 }
+
 
 function visualizeGraphAlgorithm(grid, startNode, endNode, value) {
     let visitedArray;

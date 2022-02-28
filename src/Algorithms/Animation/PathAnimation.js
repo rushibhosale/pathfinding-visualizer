@@ -1,45 +1,58 @@
-import { sleep } from "../UtilityFunctions";
 
-export async function PathAnimation(visitedNodes, minimumPath, speed) {
+export function PathAnimation(visitedNodes, minimumPath, speed, setVisualizingState) {
+
+    setVisualizingState(true);
+    animate(0);
+    async function animate(index) {
+        return new Promise(resolve => setTimeout(() => {
+            if (index === visitedNodes.length) {
+                animateShortestPath(minimumPath, speed, setVisualizingState);
+                return false;
+            }
+            const node = visitedNodes[index];
+
+            if (node.isStartNode) {
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                    `node start-node node-visited`;
+            }
+
+            else if (node.isFinishNode)
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                    `node finish-node node-visited`;
+            else
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                    `node node-visited`;
+            // await sleep(speed);
+            animate(index + 1);
+        }, speed));
 
 
-    console.log(speed)
-    for (let i = 0; visitedNodes && i <= visitedNodes.length; i++) {
-        const node = visitedNodes[i];
-        if (i === visitedNodes.length) {
-            await animateShortestPath(minimumPath, speed);
-            return false;
-        }
-
-        if (node.isStartNode) {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node start-node node-visited`;
-
-        }
-        else if (node.isFinishNode)
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node finish-node node-visited`;
-        else
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node node-visited`;
-        await sleep(speed);
     }
-
-    // await animateShortestPath(minimumPath, speed);
 }
-async function animateShortestPath(minimumPath, speed) {
-    for (let i = 0; i < minimumPath.length; i++) {
-        const node = minimumPath[i];
-        if (node.isStartNode)
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node start-node node-shortest-path`;
-        else if (node.isFinishNode)
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node finish-node node-shortest-path`;
-        else
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-                `node node-shortest-path`;
+function animateShortestPath(minimumPath, speed, setVisualizingState) {
 
-        await sleep(speed);
+    function animate(index) {
+        if (index >= minimumPath.length) {
+            setVisualizingState(false);
+            return;
+        }
+        setTimeout(
+            () => {
+                const node = minimumPath[index];
+                if (node.isStartNode)
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        `node start-node node-shortest-path`;
+                else if (node.isFinishNode)
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        `node finish-node node-shortest-path`;
+                else
+                    document.getElementById(`node-${node.row}-${node.col}`).className =
+                        `node node-shortest-path`;
+                animate(index + 1);
+            }, speed
+        )
     }
+    animate(0);
+
+
 }

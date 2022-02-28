@@ -8,9 +8,9 @@ export function Dijstras(grid, startNode, endNode) {
     while (!!unvisitedNodes.length) {
         const closetNode = getClosetNode(unvisitedNodes);
         if (closetNode.isWall) continue;
-        closetNode.isVisited = true;
         if (closetNode.distance === Infinity) return visitedNodes;
         visitedNodes.push(closetNode);
+        closetNode.isVisited = true;
         if (closetNode === endNode) {
             return visitedNodes;
         }
@@ -57,3 +57,15 @@ export const getShortesPath = (node) => {
     shortesPath.unshift(node);
     return shortesPath;
 }
+
+
+export const algorithm = [
+    "create setPoint array",
+    "Assign distance to Infinity",
+    "assign source vertext  distance to 0",
+    "while setpoint does not include all vertex",
+    "pick closet vetex min distance ",
+    "include  closet to setPoint",
+    "chek if u is equal to target node  return setpoint",
+    "update distance value"
+]

@@ -1,17 +1,8 @@
 import { Component } from "react";
-import { MazeAnimation } from "../../Algorithms/Animation/MazeAnimation";
-import { PathAnimation } from "../../Algorithms/Animation/PathAnimation";
-import { Astar } from "../../Algorithms/GraphAlgorithms/Astar";
-import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirstSearch";
-import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
-import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
-import { GreedyBFS } from "../../Algorithms/GraphAlgorithms/GreedyBFS";
-import { RecursiveDivision } from "../../Algorithms/MazeAlgorithms/RecursiveDivision";
-import { RecursiveDivisionHorizontal } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionHorizontal";
-import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionVertical";
-import { clearPaths } from "../../Algorithms/UtilityFunctions";
+// import { Algo } from "../Algo";
 import { Navbar } from "../Navbar/Navbar";
 import "./Grid.css";
+import { Info } from "./Info/Info";
 import { Node } from "./Node/Node";
 import { RunAlgorithms } from "./RunAlgorithm";
 
@@ -30,14 +21,16 @@ export class Grid extends Component {
             grid: [],
             isMouseClicked: false,
             isDraggingStart: false,
-            isDraggingFinsh: false
+            isDraggingFinsh: false,
         }
+        this.isAlgorithmVisualizing = false
         //set variable for  max rows and cols
-        this.maxWidth = 50;
-        this.maxHeight = 21;
+        this.maxWidth = 60;
+        this.maxHeight = 25;
     }
 
     componentDidMount() {
+
         const grid = this.createInitialGrid();
         this.setState({ grid });
     }
@@ -70,6 +63,8 @@ export class Grid extends Component {
                 </button> | <button onClick={this.visualizeMaze.bind(this)}>
                     generateMaze!!
                 </button> */}
+                <Info></Info>
+                {/* <Algo></Algo> */}
                 <div className="grid">
                     {
                         grid.map((row, rowIdx) => {
@@ -93,7 +88,9 @@ export class Grid extends Component {
                                 </div>
                             );
                         })}
-                </div></>
+                </div>
+
+            </>
 
         );
     }
@@ -101,6 +98,7 @@ export class Grid extends Component {
     //mouse clicked
     handleMouseDownEvent(row, col) {
         let grid;
+        if (this.isAlgorithmVisualizing) return;
         if (row === START_NODE_ROW && col === START_NODE_COL) {
             grid = toggleStart(this.state.grid, row, col);
             this.setState({ isDraggingStart: true });
@@ -115,8 +113,9 @@ export class Grid extends Component {
         this.setState({ grid, isMouseClicked: true });
 
     }
+    //handle mouse enter event
     handleMouseEnterEvent(row, col) {
-        if (!this.state.isMouseClicked) return;
+        if (this.isAlgorithmVisualizing || !this.state.isMouseClicked) return;
         let grid;
         if (this.state.isDraggingStart) {
             if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) return;
@@ -158,16 +157,20 @@ export class Grid extends Component {
     //     );
     //     MazeAnimation(visitedArray);
     // }
+    setVisualizingState(val) {
+        this.isAlgorithmVisualizing = val;
+    }
+
     algorithmHandler(value, type, speed) {
+        if (this.isAlgorithmVisualizing) return;
         const { grid } = this.state;
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-        if (value === "clearPaths") {
+        RunAlgorithms(grid, startNode, endNode, value, type, speed, this.setVisualizingState.bind(this));
 
-        }
-        RunAlgorithms(grid, startNode, endNode, value, type, speed)
     }
 }
+
 //create Node
 const createNewNode = (row, col) => {
     return {

@@ -1,10 +1,12 @@
 .navbar {
   width: 100%;
   margin: auto;
-  background-color: #333;
+  background-color: #1f3541;
   display: flex;
+  /* height: 50px; */
   flex-wrap: wrap;
-  justify-content: center;
+  /* padding: 0 40px; */
+  justify-content: space-evenly;
   align-items: center;
   color: #ffffff;
 }
@@ -12,26 +14,31 @@
 .title {
   justify-self: flex-start;
   cursor: pointer;
-  font-size: 25px;
+  /* margin-left: 100px; */
+  /* margin-right: 20px; */
+  padding: 0 10px;
+  /* background-color: red; */
+  font-size: 30px;
+  font-weight: bold;
 }
 .nav-links {
   display: flex;
   list-style-type: none;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .nav-links li {
-  font-family: cursive;
   margin-left: 20px;
 }
 .nav-links li a {
   display: inline-block;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
   outline: none;
   margin: 0;
+  /* font-weight: bold; */
   color: white;
   padding: 10px 14px;
   position: relative;
@@ -40,6 +47,7 @@
 .nav-links li a:hover {
   color: rgba(220, 20, 60, 0.7);
 }
+
 .fa-caret-down {
   margin: 5px;
   display: inline-block;
@@ -50,7 +58,7 @@
   display: none;
   position: absolute;
   top: 60px;
-  background-color: #333;
+  background-color: #1f3541;
   border-radius: 4px;
   overflow: hidden;
   padding: 10px;
@@ -59,17 +67,22 @@
   text-align: left;
   z-index: 2;
 }
+
 .dropdown-content li {
   margin: 2px 0;
   display: block;
 }
 .dropdown-content li a {
   padding: 5px 10px;
+  font-size: 16px;
   color: #ffffff !important;
 }
 .dropdown-content a:hover {
   background-color: rgba(220, 20, 60, 0.7);
   border-radius: 4px;
+}
+.active {
+  background-color: rgba(220, 20, 60, 0.7);
 }
 
 .show {
@@ -87,7 +100,6 @@
 #visualizebtn a:hover {
   color: #ffffff;
   border: 1px solid #ffffff;
-  /* background-color: #333; */
 }
 .horizontal {
   display: inline-block !important;
@@ -102,7 +114,7 @@
     border: none;
     text-align: center;
     box-shadow: none;
-    top: -15px;
+    top: -10px;
     z-index: 2;
     padding: 10px;
     margin: 0;
@@ -117,5 +129,8 @@
   .show {
     display: block;
     position: relative;
+  }
+  .active {
+    background-color: #1f3541;
   }
 }

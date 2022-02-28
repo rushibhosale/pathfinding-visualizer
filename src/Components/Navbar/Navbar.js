@@ -17,7 +17,6 @@ export class Navbar extends Component {
 
     }
     componentDidMount() {
-        console.log(this.mainHandler)
         window.addEventListener('click', this.handleWindowClickEvent);
     }
 
@@ -71,7 +70,7 @@ export class Navbar extends Component {
             <nav className="navbar">
                 <h1 className="title">pathfinding visualizer</h1>
                 <ul className="nav-links">
-                    <li className="dropdown">
+                    <li className={this.state.dropdown1 ? 'dropdown active' : 'dropdown'}>
                         <a href="#" className="algorithm-dropbtn"
                             onClick={e => { this.handleDropDown(e) }}>Algorithm's<i className="fa-solid fa-caret-down"></i></a>
                         {/* dropdown */}
@@ -84,7 +83,7 @@ export class Navbar extends Component {
                             }
                             } />
                     </li>
-                    <li className="dropdown">
+                    <li className={this.state.dropdown2 ? 'dropdown active' : 'dropdown'}>
                         <a href="#" className="maze-dropbtn"
                             onClick={e => { this.handleDropDown(e) }}>Maze Algorithm's<i className="fa-solid fa-caret-down"></i></a>
                         {/* dropdown */}
@@ -98,7 +97,7 @@ export class Navbar extends Component {
                             } />
                     </li>
                     <li id="visualizebtn"><a href="#" onClick={e => this.visualizeAlgoritm(e)}>{this.state.currAlgorithm}</a></li>
-                    <li><a href="#" onClick={e => this.handler(e, "clearBoard")}>Clear Board</a></li>
+                    {/* <li><a href="#" onClick={e => this.handler(e, "clearBoard")}>Clear Board</a></li> */}
                     <li><a href="#" onClick={e => this.handler(e, "clearPaths")}>Clear Paths & walls</a></li>
                     <li className="dropdown">
                         <a href="" className="speed-dropbtn"
