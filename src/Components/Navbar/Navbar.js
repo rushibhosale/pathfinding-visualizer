@@ -5,6 +5,7 @@ import "./Navbar.css";
 export class Navbar extends Component {
     constructor({ data }) {
         super();
+        this.isVisualizing = data.isVisualizing;
         this.mainHandler = data.handler;
         this.state = {
             dropdown1: false,
@@ -18,6 +19,10 @@ export class Navbar extends Component {
     }
     componentDidMount() {
         window.addEventListener('click', this.handleWindowClickEvent);
+    }
+    componentDidUpdate() {
+        console.log(this.isVisualizing);
+
     }
 
     componentWillUnmount() {

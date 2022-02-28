@@ -2,6 +2,7 @@
 export function PathAnimation(visitedNodes, minimumPath, speed, setVisualizingState) {
 
     setVisualizingState(true);
+    speed = speed === "normal" ? 100 : speed === "slow" ? 500 : 10;
     animate(0);
     async function animate(index) {
         return new Promise(resolve => setTimeout(() => {

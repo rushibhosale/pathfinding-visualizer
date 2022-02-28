@@ -55,6 +55,7 @@ export class Grid extends Component {
             <>
                 <Navbar
                     data={{
+                        isVisualizing: this.isAlgorithmVisualizing,
                         handler: this.algorithmHandler.bind(this)
                     }}
                 ></Navbar>

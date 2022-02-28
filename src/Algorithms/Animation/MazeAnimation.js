@@ -2,7 +2,7 @@
 
 export async function MazeAnimation(visitedNodes, speed, setVisualizingState) {
     setVisualizingState(true);
-    speed = 20;
+    speed = speed === "normal" ? 10 : speed === "slow" ? 50 : 0;
     async function animate(index) {
         if (index === visitedNodes.length) {
             setVisualizingState(false);

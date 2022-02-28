@@ -11,7 +11,6 @@ import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/Recur
 import { clearPaths } from "../../Algorithms/UtilityFunctions";
 
 export function RunAlgorithms(grid, startNode, endNode, value, type, speed, setVisualizingState) {
-    speed = speed === "normal" ? 100 : speed === "slow" ? 500 : 10;
 
     if (type === "graph") {
         clearPaths(grid, false);
