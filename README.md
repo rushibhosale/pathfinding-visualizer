@@ -3,6 +3,8 @@
 Visualize Graph algorithm's and maze generation algorithm to find path between **Start Node** and
 **Target Node**.
 
+[click here to live experiment](https://rushibhosale.github.io/pathfinding-visualizer/)
+
 **Sample Dijstra's Algorithm**
 ![sample](sample.gif)
 
