@@ -1,23 +1,33 @@
 .row .column {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 10px 0 0px 20px;
-  font-size: 18px;
+  margin: 10px 5px;
+
+  text-align: center;
+  font-size: 16px;
+}
+p {
+  padding: 0 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .square {
   width: 25px;
   height: 25px;
   cursor: pointer;
   text-align: center;
-  margin: auto;
+}
+.unvisited {
   border: 1px solid rgba(175, 216, 248, 0.9);
 }
-
-p {
-  padding: 0 10px;
-  font-family: Arial, Helvetica, sans-serif;
+.visited {
+  background-color: rgba(0, 190, 218, 0.75);
 }
+.current {
+  background-color: rgba(0, 0, 66, 0.75);
+}
+
 .shortest-path {
   background-color: yellow;
 }

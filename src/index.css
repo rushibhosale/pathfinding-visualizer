@@ -3,8 +3,11 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  list-style-type: none;
 }
 
 body {
   font-family: "Titillium Web", sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }

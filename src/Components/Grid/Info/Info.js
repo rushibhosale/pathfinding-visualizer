@@ -9,29 +9,33 @@ export class Info extends Component {
         return (
             <div className="row">
                 <div className="column">
-                    <div className="square start-node"></div>
                     <p>start node</p>
+                    <div className="square start-node"></div>
                 </div>
                 <div className="column">
-                    <div className="square finish-node"></div>
                     <p>target node</p>
-                </div>
-                <div className="column">
-                    <div className="square visited"></div>
-                    <p>visited node</p>
+                    <div className="square finish-node"></div>
                 </div>
 
                 <div className="column">
-                    <div className="square current"></div>
+                    <p>normal node</p>
+                    <div className="square unvisited"></div>
+                </div>
+                <div className="column">
+                    <p>visited node</p>
+                    <div className="square visited"></div>
+                </div>
+                <div className="column">
                     <p>closet node</p>
+                    <div className="square current"></div>
                 </div>
                 <div className="column">
-                    <div className="square shortest-path"></div>
                     <p>shortest path</p>
+                    <div className="square shortest-path"></div>
                 </div>
                 <div className="column">
-                    <div className="square wall"></div>
                     <p>wall</p>
+                    <div className="square wall"></div>
                 </div>
 
 

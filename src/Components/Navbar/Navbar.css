@@ -14,10 +14,7 @@
 .title {
   justify-self: flex-start;
   cursor: pointer;
-  /* margin-left: 100px; */
-  /* margin-right: 20px; */
   padding: 0 10px;
-  /* background-color: red; */
   font-size: 30px;
   font-weight: bold;
 }
@@ -38,7 +35,6 @@
   font-size: 18px;
   outline: none;
   margin: 0;
-  /* font-weight: bold; */
   color: white;
   padding: 10px 14px;
   position: relative;
@@ -84,7 +80,10 @@
 .active {
   background-color: rgba(220, 20, 60, 0.7);
 }
-
+.prevSelectd a {
+  background-color: rgba(220, 20, 60, 0.7);
+  border-radius: 4px;
+}
 .show {
   display: block;
 }

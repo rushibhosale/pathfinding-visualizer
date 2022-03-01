@@ -31,6 +31,8 @@ const getAllNeighbours = (node, grid) => {
     if (col !== 0) neighbours.push(grid[row][col - 1]);
     if (row !== 0) neighbours.push(grid[row - 1][col]);
 
+    //for 8 neighbours
+
     // if (row !== 0 && col !== 0) neighbours.push(grid[row - 1][col - 1]);
     // if (row !== 0 && col !== grid[0].length - 1) neighbours.push(grid[row - 1][col + 1]);
 

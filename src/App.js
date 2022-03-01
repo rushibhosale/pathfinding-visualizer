@@ -6,7 +6,6 @@ function App() {
       <Grid></Grid>
     </div>
   );
-
 }
 
 export default App;

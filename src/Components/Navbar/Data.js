@@ -8,7 +8,7 @@ const GraphAlgorithms = [
         value: "A*"
     },
     {
-        title: "Best First Search",
+        title: "Best First Search (Greedy)",
         value: "Greedy BFS"
     },
     {
@@ -28,20 +28,24 @@ const MazeAlgorithms = [
     },
 
     {
-        title: "Recursive Division Maze(Horizontal)",
+        title: "Recursive Division Maze (Horizontal skew)",
         value: "RDMH",
     },
 
     {
-        title: "Recursive Division Maze(Vertical)",
+        title: "Recursive Division Maze (Vertical skew)",
         value: "RDMV",
     },
+    {
+        title: "Random Maze",
+        value: "RandomMaze"
+    }
 
 ]
 const speed = [
     {
         title: "Slow",
-        value: "slow"
+        value: "Slow"
     },
     {
         title: "Normal",

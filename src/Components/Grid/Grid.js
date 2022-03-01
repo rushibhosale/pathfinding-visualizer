@@ -1,5 +1,4 @@
 import { Component } from "react";
-// import { Algo } from "../Algo";
 import { Navbar } from "../Navbar/Navbar";
 import "./Grid.css";
 import { Info } from "./Info/Info";
@@ -30,7 +29,6 @@ export class Grid extends Component {
     }
 
     componentDidMount() {
-
         const grid = this.createInitialGrid();
         this.setState({ grid });
     }
@@ -48,15 +46,13 @@ export class Grid extends Component {
     }
 
     render() {
-        // console.log(this.state.grid)
         const { grid } = this.state;
-
         return (
             <>
+                {/* navbar  */}
                 <Navbar
                     data={{
-                        isVisualizing: this.isAlgorithmVisualizing,
-                        handler: this.algorithmHandler.bind(this)
+                        handler: this.algorithmHandler.bind(this),
                     }}
                 ></Navbar>
                 {/* <button onClick={this.visualize.bind(this)}>
@@ -64,8 +60,10 @@ export class Grid extends Component {
                 </button> | <button onClick={this.visualizeMaze.bind(this)}>
                     generateMaze!!
                 </button> */}
+
+                {/* Info */}
                 <Info></Info>
-                {/* <Algo></Algo> */}
+
                 <div className="grid">
                     {
                         grid.map((row, rowIdx) => {
@@ -96,6 +94,7 @@ export class Grid extends Component {
         );
     }
 
+    /* Mouse Events Functions*/
     //mouse clicked
     handleMouseDownEvent(row, col) {
         let grid;
@@ -133,8 +132,13 @@ export class Grid extends Component {
     }
     //mouse realeased
     handleMouseUpEvent(row, col) {
+        if (this.isAlgorithmVisualizing) return;
         this.setState({ isMouseClicked: false, isDraggingStart: false, isDraggingFinsh: false })
     }
+    /* Mouse Events Functions end*/
+
+
+
     // visualize() {
     //     // console.log("visulizing", this.state);
     //     const { grid } = this.state;
@@ -161,6 +165,7 @@ export class Grid extends Component {
     setVisualizingState(val) {
         this.isAlgorithmVisualizing = val;
     }
+
 
     algorithmHandler(value, type, speed) {
         if (this.isAlgorithmVisualizing) return;

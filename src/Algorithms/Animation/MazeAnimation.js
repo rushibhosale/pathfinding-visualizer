@@ -2,8 +2,8 @@
 
 export async function MazeAnimation(visitedNodes, speed, setVisualizingState) {
     setVisualizingState(true);
-    speed = speed === "normal" ? 10 : speed === "slow" ? 50 : 0;
-    async function animate(index) {
+    speed = speed === "normal" ? 20 : speed === "slow" ? 50 : 5;
+    function animate(index) {
         if (index === visitedNodes.length) {
             setVisualizingState(false);
             return;
@@ -13,12 +13,10 @@ export async function MazeAnimation(visitedNodes, speed, setVisualizingState) {
                 const node = visitedNodes[index];
                 if (node.isWall) {
                     document.getElementById(`node-${node.row}-${node.col}`).className =
-                        "node wall";
+                        "node wall wall-visited";
                 }
                 animate(index + 1);
-            }, speed
-        )
-
+            }, speed)
     }
-    await animate(0);
+    animate(0);
 }

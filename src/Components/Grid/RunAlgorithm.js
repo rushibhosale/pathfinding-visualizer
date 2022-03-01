@@ -5,6 +5,7 @@ import { BreadthFirstSearch } from "../../Algorithms/GraphAlgorithms/BreadthFirs
 import { DefthFirstSearch } from "../../Algorithms/GraphAlgorithms/DefthFirstSearch";
 import { Dijstras, getShortesPath } from "../../Algorithms/GraphAlgorithms/Dijstras";
 import { GreedyBFS } from "../../Algorithms/GraphAlgorithms/GreedyBFS";
+import { RandomMaze } from "../../Algorithms/MazeAlgorithms/Random";
 import { RecursiveDivision } from "../../Algorithms/MazeAlgorithms/RecursiveDivision";
 import { RecursiveDivisionHorizontal } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionHorizontal";
 import { RecursiveDivisionVertical } from "../../Algorithms/MazeAlgorithms/RecursiveDivisionVertical";
@@ -26,7 +27,6 @@ export function RunAlgorithms(grid, startNode, endNode, value, type, speed, setV
     else if (type === "clearPaths") {
         clearPaths(grid, true);
     }
-    return true;
 }
 
 
@@ -38,11 +38,9 @@ function visualizeGraphAlgorithm(grid, startNode, endNode, value) {
     else if (value === "DFS") {
         visitedArray = DefthFirstSearch(grid, startNode, endNode);
     }
-
     else if (value === "BFS") {
         visitedArray = BreadthFirstSearch(grid, startNode, endNode);
     }
-
     else if (value === "Greedy BFS") {
         visitedArray = GreedyBFS(grid, startNode, endNode);
     }
@@ -83,6 +81,10 @@ function visualizeMazeAlgorithm(grid, value) {
             grid[0].length - 2,
             "vertical",
         );
+    else if (value === "RandomMaze") {
+
+        walls = RandomMaze(grid);
+    }
 
     return walls;
 }
